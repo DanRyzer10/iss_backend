@@ -40,7 +40,7 @@ class AccountController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'message' => 'Error! Account not created',
-                'error' => $e->getMessage()
+                'error' => 'Bad Request'
             ], 400);
         }
     }
