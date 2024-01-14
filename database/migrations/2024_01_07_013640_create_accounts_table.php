@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre del negocio',100)->required();
-            $table->enum('industria', [
+            $table->string('businessName',100)->required();
+            $table->enum('industry', [
                 "Medicina",
                 "Veterinaria",
                 "Agencia de Marketing",
@@ -31,7 +31,7 @@ return new class extends Migration
                 "Concesionarios",
                 "Otros"
             ])->required();
-            $table->string('nombres y apellidos',100)->required();
+            $table->string('fullname',100)->required();
             $table->timestamps();
         });
     }

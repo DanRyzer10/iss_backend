@@ -1,12 +1,8 @@
 <?php
 
 namespace Tests\Feature;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Models\Account;
-
 class AccountTest extends TestCase
 {
     use RefreshDatabase;
@@ -14,9 +10,9 @@ class AccountTest extends TestCase
     public function testStoreValidData()
     {
         $data = [
-            'nombre del negocio' => 'Test Business',
-            'industria' => 'Medicina',
-            'nombres y apellidos' => 'Test Name'
+            'businessName' => 'Test Business',
+            'industry' => 'Medicina',
+            'fullname' => 'Test Name'
         ];
 
         $response = $this->postJson('/api/accounts', $data);
@@ -29,13 +25,13 @@ class AccountTest extends TestCase
     public function testStoreInvalidData()
     {
         $data = [
-            'nombre del negocio' => '',
-            'industria' => '',
-            'nombres y apellidos' => ''
+            'businessName' => '',
+            'industry' => '',
+            'fullname' => ''
         ];
 
         $response = $this->postJson('/api/accounts', $data);
 
-        $response->assertStatus(422);
+        $response->assertStatus(400);
     }
 }

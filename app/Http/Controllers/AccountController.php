@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
+use App\Rules\checkIndustry;
 
 class AccountController extends Controller
 {
@@ -26,12 +27,11 @@ class AccountController extends Controller
     {
         try{
             $request->validate([
-                'nombre del negocio' => 'required',
-                'industria' => 'required',
-                'nombres y apellidos' => 'required'
+                'businessName' =>['required','regex:/^[\pL\pN\s\!¡ñÑ?¿#$&%\/\-_.:;,@()=+*]+$/u'],
+                'industry' => ['required', new checkIndustry()],
+                'fullname' => ['required', 'regex:/^[a-zA-ZñÑ\s]*$/']
             ]);
-           
-            
+
             $account = Account::create($request->all());
             return response()->json([
                 'message' => 'Great success! New account created',
@@ -40,7 +40,7 @@ class AccountController extends Controller
         }catch(\Exception $e){
             return response()->json([
                 'message' => 'Error! Account not created',
-                'error' => 'Bad Request'
+                'error' => $e->getMessage()
             ], 400);
         }
     }
