@@ -16,7 +16,7 @@ class validationTest extends TestCase
     public function testCheckValidator(){
         $rule = ["industry"=>["required", new checkIndustry()]];
         $passData = ["industry"=>"Medicina"];
-        $failData = ["industry"=>"pene"];
+        $failData = ["industry"=>"cualquier cosa"];
 
         $passValidator = Validator::make($passData, $rule);
         $failValidator = Validator::make($failData, $rule);
