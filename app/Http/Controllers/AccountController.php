@@ -29,7 +29,7 @@ class AccountController extends Controller
             $request->validate([
                 'businessName' =>['required','regex:/^[\pL\pN\s\!¡ñÑ?¿#$&%\/\-_.:;,@()=+*]+$/u'],
                 'industry' => ['required', new checkIndustry()],
-                'fullname' => ['required', 'regex:/^[a-zA-ZñÑ\s]*$/']
+                'fullname' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$/']
             ]);
 
             $account = Account::create($request->all());
